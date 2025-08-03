@@ -29,7 +29,7 @@
       transition: all 0.3s ease;
     }
 
-    [data-theme="dark"] body {
+    body[data-theme="dark"] {
       background-color: var(--bg-dark);
       color: var(--text-dark);
     }
@@ -59,10 +59,18 @@
     .dark-toggle {
       background: none;
       border: none;
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 110px;
+      height: 40px;
+      font-size: 1.7rem;
       cursor: pointer;
-      color: white;
       margin-left: 1rem;
+    }
+
+    .dark-toggle span {
+      font-size: 1.7rem;
     }
 
     h1 {
@@ -82,6 +90,11 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    body[data-theme="dark"] .column {
+      background-color: var(--card-dark);
+      color: var(--text-dark);
     }
 
     h2 {
@@ -131,7 +144,7 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="light">
 
 <!-- Google Analytics Tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W72951M38F"></script>
@@ -142,23 +155,19 @@
   gtag('config', 'G-W72951M38F');
 </script>
 
-<!-- Dark Mode Script -->
-<script>
-  function toggleTheme() {
-    const html = document.documentElement;
-    const icon = document.getElementById('theme-icon');
-    const current = html.getAttribute('data-theme');
-    if (current === 'dark') {
-      html.setAttribute('data-theme', 'light');
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-    } else {
-      html.setAttribute('data-theme', 'dark');
-      icon.classList.remove('fa-sun');
-      icon.classList.add('fa-moon');
-    }
-  }
-</script>
+<!-- Navbar -->
+<nav>
+  <div class="nav-left">
+    <a>Semester 1</a>
+    <a>Semester 2</a>
+  </div>
+  <div class="nav-right">
+    <a class="download-btn" href="sem2/tut12/download all.zip" download>Download All</a>
+    <button class="dark-toggle" onclick="toggleTheme()">
+      <span id="theme-icon">☀</span>
+    </button>
+  </div>
+</nav>
 
 <!-- Page Header -->
 <h1>Excel Question Bank</h1>
@@ -255,19 +264,21 @@
   </div>
 </div>
 
-<!-- Navbar -->
-<nav>
-  <div class="nav-left">
-    <a>Semester 1</a>
-    <a>Semester 2</a>
-  </div>
-  <div class="nav-right">
-    <a class="download-btn" href="sem2/tut12/download all.zip" download>Download All</a>
-    <button class="dark-toggle" onclick="toggleTheme()">
-      <i id="theme-icon" class="fas fa-sun"></i>
-    </button>
-  </div>
-</nav>
+<!-- Dark Mode Script -->
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    const current = body.getAttribute('data-theme');
+    if (current === 'dark') {
+      body.setAttribute('data-theme', 'light');
+      icon.textContent = '\u2600';
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      icon.textContent = '\u263E';
+    }
+  }
+</script>
 
 </body>
 </html>
